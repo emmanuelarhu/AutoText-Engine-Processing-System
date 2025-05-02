@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="main.java.com.autotextengine.view.MainView"
+            prefHeight="768.0" prefWidth="1024.0">
+
+    <!-- Add MenuBar -->
+    <top>
+        <VBox>
+            <!-- Menu Bar -->
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Import..." onAction="#handleImportAction" />
+                    <MenuItem text="Export..." onAction="#handleExportAction" />
+                    <SeparatorMenuItem />
+                    <MenuItem text="Settings" onAction="#handleSettingsAction" />
+                    <SeparatorMenuItem />
+                    <MenuItem text="Exit" onAction="#handleExitAction" />
+                </Menu>
+
+                <Menu text="Edit">
+                    <MenuItem text="Clear Input" onAction="#handleClearInput" />
+                    <MenuItem text="Clear Output" onAction="#handleClearOutput" />
+                </Menu>
+
+                <Menu text="Operations">
+                    <MenuItem text="Process" onAction="#handleProcessAction" />
+                </Menu>
+
+                <Menu text="Help">
+                    <MenuItem text="Help Contents" onAction="#showHelp" />
+                    <MenuItem text="About" onAction="#showAbout" />
+                </Menu>
+            </MenuBar>
+
+            <!-- Toolbar -->
+            <ToolBar styleClass="main-toolbar">
+                <Button text="Import" onAction="#handleImportAction" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Import files"/></tooltip>
+                </Button>
+                <Button text="Export" onAction="#handleExportAction" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Export results"/></tooltip>
+                </Button>
+                <Separator orientation="VERTICAL" />
+                <Button text="Process" onAction="#handleProcessAction" styleClass="toolbar-button, button-primary">
+                    <tooltip><Tooltip text="Process current data"/></tooltip>
+                </Button>
+                <Separator orientation="VERTICAL" />
+                <Button text="Clear Input" onAction="#handleClearInput" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Clear input area"/></tooltip>
+                </Button>
+                <Button text="Clear Output" onAction="#handleClearOutput" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Clear output area"/></tooltip>
+                </Button>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Settings" onAction="#handleSettingsAction" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Application settings"/></tooltip>
+                </Button>
+                <Button text="Help" onAction="#showHelp" styleClass="toolbar-button">
+                    <tooltip><Tooltip text="Show help"/></tooltip>
+                </Button>
+            </ToolBar>
+
+            <!-- Header section -->
+            <VBox styleClass="header">
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label text="AutoText Engine Processing System" styleClass="header-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </top>
+
+    <!-- Main content area with tab pane -->
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <!-- Text Processing Tab -->
+            <Tab text="Text Processing">
+                <fx:include source="file-processing-view.fxml"/>
+            </Tab>
+
+            <!-- Regex Pattern Matching Tab -->
+            <Tab text="Regex Operations">
+                <fx:include source="regex-view.fxml"/>
+            </Tab>
+
+            <!-- Batch Processing Tab -->
+            <Tab text="Batch Processing">
+                <fx:include source="batch-processing-view.fxml"/>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <!-- Status bar -->
+    <bottom>
+        <HBox styleClass="status-bar">
+            <Label fx:id="statusLabel" text="Ready" styleClass="status-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="versionLabel" text="Version 1.0.0"/>
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="main.java.com.autotextengine.view.RegexView"
+      spacing="10" styleClass="main-container">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <HBox spacing="10">
+        <Label text="Pattern Type:"/>
+        <ComboBox fx:id="patternTypeComboBox" promptText="Select Pattern Type"/>
+    </HBox>
+
+    <!-- Regex Pattern Section -->
+    <Label text="Regular Expression Pattern" styleClass="section-title"/>
+    <HBox spacing="10">
+        <TextField fx:id="patternField" promptText="Enter regex pattern..." HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="savedPatternsComboBox" promptText="Saved Patterns"/>
+        <Button text="Save Pattern" onAction="#handleSavePattern"/>
+    </HBox>
+
+    <!-- Regex Options -->
+    <HBox spacing="10">
+        <CheckBox fx:id="caseSensitiveCheckBox" text="Case Sensitive"/>
+        <CheckBox fx:id="multilineCheckBox" text="Multiline"/>
+        <CheckBox fx:id="dotAllCheckBox" text="Dot All"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Test Pattern" onAction="#handleTestPattern" styleClass="button-primary"/>
+    </HBox>
+
+    <!-- Input Text -->
+    <Label text="Input Text" styleClass="section-title"/>
+    <TextArea fx:id="inputTextArea" promptText="Enter text to process..." VBox.vgrow="ALWAYS"/>
+
+    <HBox spacing="10">
+        <Button text="Load File" onAction="#handleLoadFile"/>
+        <Button text="Clear" onAction="#handleClearInput"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Find Matches" onAction="#handleFindMatches" styleClass="button-primary"/>
+        <Button text="Replace" onAction="#handleReplace"/>
+    </HBox>
+
+    <!-- Replace pattern -->
+    <HBox spacing="10">
+        <Label text="Replace Pattern:"/>
+        <TextField fx:id="replacementField" promptText="Replacement text..." HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Results Section -->
+    <TitledPane text="Match Results" expanded="true" VBox.vgrow="ALWAYS">
+        <VBox spacing="10">
+            <ListView fx:id="matchesListView" VBox.vgrow="ALWAYS"/>
+            <HBox spacing="10">
+                <Label text="Total Matches:"/>
+                <Label fx:id="matchCountLabel" text="0"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Copy All Matches" onAction="#handleCopyMatches"/>
+                <Button text="Export Matches" onAction="#handleExportMatches"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- Pattern Library Section -->
+    <TitledPane text="Pattern Library" expanded="false">
+        <VBox spacing="10">
+            <TableView fx:id="patternLibraryTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="patternNameColumn" text="Name"/>
+                    <TableColumn fx:id="patternRegexColumn" text="Pattern"/>
+                    <TableColumn fx:id="patternDescriptionColumn" text="Description"/>
+                </columns>
+            </TableView>
+            <HBox spacing="10">
+                <Button text="Add New" onAction="#handleAddPattern"/>
+                <Button text="Edit" onAction="#handleEditPattern"/>
+                <Button text="Delete" onAction="#handleDeletePattern"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Import" onAction="#handleImportPatterns"/>
+                <Button text="Export" onAction="#handleExportPatterns"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+</VBox>
