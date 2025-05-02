@@ -42,7 +42,7 @@ public class RegexServiceTest {
         // Test basic matching
         List<String> matches = regexService.findMatches("Hello 123 World", "\\d+");
         assertEquals(1, matches.size(), "Should find one match");
-        assertEquals("123", matches.get(0), "Should match the digits");
+        assertEquals("123", matches.getFirst(), "Should match the digits");
 
         // Test multiple matches
         matches = regexService.findMatches("abc123def456ghi", "\\d+");
@@ -71,9 +71,9 @@ public class RegexServiceTest {
                 "(\\w+)\\s+(\\w+):\\s+([\\w@.]+)");
 
         assertEquals(1, groupMatches.get("Full match").size(), "Should have one full match");
-        assertEquals("John", groupMatches.get("Group 1").get(0), "First group should be John");
-        assertEquals("Doe", groupMatches.get("Group 2").get(0), "Second group should be Doe");
-        assertEquals("john@example.com", groupMatches.get("Group 3").get(0), "Third group should be the email");
+        assertEquals("John", groupMatches.get("Group 1").getFirst(), "First group should be John");
+        assertEquals("Doe", groupMatches.get("Group 2").getFirst(), "Second group should be Doe");
+        assertEquals("john@example.com", groupMatches.get("Group 3").getFirst(), "Third group should be the email");
 
         // Test with no matches
         Map<String, List<String>> noMatches = regexService.findMatchesWithGroups(
