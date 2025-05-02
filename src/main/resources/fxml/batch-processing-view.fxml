@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="main.java.com.autotextengine.view.BatchProcessingView"
+      spacing="10" styleClass="main-container">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Input Files Section -->
+    <Label text="Input Files" styleClass="section-title"/>
+    <HBox spacing="10">
+        <TextField fx:id="inputDirectoryField" promptText="Select input directory..." HBox.hgrow="ALWAYS" editable="false"/>
+        <Button fx:id="addFilesButton" text="Browse..." onAction="#handleAddDirectory"/>
+    </HBox>
+
+    <TitledPane text="File Filters" expanded="true">
+        <VBox spacing="10">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="File Extensions:"/>
+                <TextField fx:id="fileExtensionsField" promptText="txt, csv, log" HBox.hgrow="ALWAYS"/>
+                <CheckBox fx:id="includeSubdirectoriesCheckBox" text="Include Subdirectories"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Name Pattern:"/>
+                <TextField fx:id="fileNamePatternField" promptText="*data*.txt" HBox.hgrow="ALWAYS"/>
+                <Label text="Min Size (KB):"/>
+                <Spinner fx:id="minFileSizeSpinner" prefWidth="100"/>
+                <Label text="Max Size (KB):"/>
+                <Spinner fx:id="maxFileSizeSpinner" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- Files Table -->
+    <TableView fx:id="filesTableView" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="fileNameColumn" text="File Name"/>
+            <TableColumn fx:id="fileSizeColumn" text="Size"/>
+            <TableColumn fx:id="filePathColumn" text="Path"/>
+            <TableColumn fx:id="fileStatusColumn" text="Status"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Refresh" onAction="#handleRefreshFiles"/>
+        <Button text="Select All" onAction="#handleSelectAllFiles"/>
+        <Button fx:id="clearFilesButton" text="Clear Selection" onAction="#handleClearFiles"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="removeFileButton" text="Remove Selected" onAction="#handleRemoveFile"/>
+        <Button text="Add Files..." onAction="#handleAddFiles"/>
+    </HBox>
+
+    <!-- Processing Options -->
+    <TitledPane text="Processing Options" expanded="true">
+        <VBox spacing="10">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Operation:"/>
+                <ComboBox fx:id="operationComboBox" promptText="Select operation..." HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Output Directory:"/>
+                <TextField fx:id="outputDirectoryField" promptText="Select output directory..." HBox.hgrow="ALWAYS" editable="false"/>
+                <Button fx:id="browseOutputDirButton" text="Browse..." onAction="#handleBrowseOutputDir"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Output Format:"/>
+                <ComboBox fx:id="outputFormatComboBox" promptText="Select format..." HBox.hgrow="ALWAYS"/>
+                <CheckBox fx:id="createSeparateFilesCheckBox" text="Create Separate Output Files"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- Action Buttons -->
+    <HBox spacing="10">
+        <Button fx:id="processButton" text="Start Processing" onAction="#handleProcessBatch" styleClass="button-primary"/>
+        <Button fx:id="stopButton" text="Stop" onAction="#handleStopProcessing" disable="true"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Save Configuration" onAction="#handleSaveConfiguration"/>
+        <Button text="Load Configuration" onAction="#handleLoadConfiguration"/>
+    </HBox>
+
+    <!-- Progress Section -->
+    <VBox spacing="5">
+        <Label text="Processing Progress" styleClass="section-title"/>
+        <ProgressBar fx:id="processingProgressBar" progress="0.0" maxWidth="Infinity"/>
+        <HBox spacing="10">
+            <Label text="Status:"/>
+            <Label fx:id="statusLabel" text="Ready"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Files Processed:"/>
+            <Label fx:id="filesProcessedLabel" text="0/0"/>
+        </HBox>
+    </VBox>
+</VBox>
